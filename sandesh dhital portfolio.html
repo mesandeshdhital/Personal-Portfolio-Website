@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sandesh Dhital - Computer Engineer</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --dark-bg: #0f172a;
+            --dark-secondary: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --hover-color: #38bdf8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .sidebar {
+            position: fixed;
+            width: 280px;
+            height: 100vh;
+            background: var(--dark-secondary);
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .profile-section {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            border: 3px solid var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.1);
+        }
+
+        .contact-info {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--hover-color);
+            transform: translateY(-5px);
+        }
+
+        .nav-links {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .nav-links li a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-links li a:hover {
+            background: var(--primary-color);
+            transform: translateX(10px);
+        }
+
+        .main-content {
+            margin-left: 280px;
+            padding: 2rem 3rem;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background: var(--dark-secondary);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .skill-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .skill-card ul {
+            list-style-position: inside;
+            color: var(--text-secondary);
+        }
+
+        .project-card {
+            background: var(--dark-secondary);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .publication-card {
+            background: var(--dark-secondary);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .publication-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .certification-list {
+            list-style: none;
+        }
+
+        .certification-list li {
+            background: var(--dark-secondary);
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .certification-list li:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .resume-btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--primary-color);
+            color: #fff;
+            font-size: 1.1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .resume-btn:hover {
+            background: var(--hover-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="profile-section">
+            <img src="C:\Users\Sandesh Dhital\Desktop\Sandesh Dhital\sandeshpicture.jpg" alt="Sandesh Dhital" class="profile-img">
+            <h2>Sandesh Dhital</h2>
+            <p>Computer Engineer</p>
+            <div class="contact-info">
+                <p>📍 Kathmandu, P3 44600</p>
+                <p>📞 +977-9815164479</p>
+                <p>✉️ <a href="mailto:mesandeshdhital@gmail.com">mesandeshdhital@gmail.com</a></p>
+            </div>
+            <a href="C:\Users\Sandesh Dhital\Desktop\Sandesh Dhital\Sandesh_Dhital (2).pdf" class="resume-btn" download>Download Resume</a>
+            <div class="social-links">
+                <a href="https://wa.me/9779815164479" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://t.me/sandeshdhital" target="_blank"><i class="fab fa-telegram"></i></a>
+                <a href="https://www.viber.com/" target="_blank"><i class="fab fa-viber"></i></a>
+                <a href="https://github.com/mesandeshdhital" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.facebook.com/dhital.sandesh.92" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/iamsandeshdhital/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/sandesh-dhital-a21b15197/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#publications">Publications</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <main class="main-content">
+        <section id="about" class="section">
+            <h2 class="section-title">About Me</h2>
+            <p>A highly motivated and detail-oriented Computer Engineering graduate seeking to start my career as a Computer Engineer. Eager to contribute my knowledge of IT systems, troubleshooting, network security, and software development to provide effective IT support and solutions for a progressive organization.</p>
+        </section>
+
+        <section id="skills" class="section">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skill-grid">
+                <div class="skill-card">
+                    <h3>Programming Languages</h3>
+                    <ul>
+                        <li>C</li>
+                        <li>C++</li>
+                        <li>Python</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <h3>Database & Cloud</h3>
+                    <ul>
+                        <li>MySQL</li>
+                        <li>MongoDB</li>
+                        <li>AWS</li>
+                        <li>Azure</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <h3>Cybersecurity</h3>
+                    <ul>
+                        <li>Network Security</li>
+                        <li>Ethical Hacking</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <h3>Data & AI</h3>
+                    <ul>
+                        <li>Machine Learning Basics</li>
+                        <li>Data Analysis</li>
+                        <li>Visualization Tools (Tableau)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="education" class="section">
+            <h2 class="section-title">Education</h2>
+            <div class="project-card">
+                <h3>Bachelor of Computer Engineering</h3>
+                <p>Kathmandu Engineering College, Kalimati</p>
+            </div>
+            <div class="project-card">
+                <h3>Plus Two: Science</h3>
+                <p>Shree Satyawati Secondary School, Damauli</p>
+            </div>
+        </section>
+
+        <section id="projects" class="section">
+            <h2 class="section-title">Projects</h2>
+            <div class="project-card">
+                <h3>Shikshyalaya (Major Project)</h3>
+                <p>Created an educational platform aimed at enhancing learning experiences through interactive tools and resources. The platform integrates various features to facilitate both teaching and learning processes.</p>
+            </div>
+            <div class="project-card">
+                <h3>SIMS - Student Information Management System (Minor Project)</h3>
+                <p>Developed a comprehensive system to manage student information efficiently. The system allows for easy data entry, retrieval, and management of student records.</p>
+            </div>
+        </section>
+
+        <section id="certifications" class="section">
+            <h2 class="section-title">Certifications</h2>
+            <ul class="certification-list">
+                <li>Cisco Certified Network Associate (CCNA)</li>
+                <li>CompTIA IT Fundamentals</li>
+                <li>Google IT Support Professional Certificate</li>
+                <li>AWS Certified Cloud Practitioner</li>
+                <li>Microsoft Certified: Azure Fundamentals</li>
+            </ul>
+        </section>
+
+        <section id="publications" class="section">
+            <h2 class="section-title">Publications</h2>
+            <div class="publication-card">
+                <h3>The Exodus of Minds: Nepal's Brain Drain in STEM Fields</h3>
+                <p>A Data-Driven Analysis</p>
+                <p>Published at: engineersvlogs.com</p>
+            </div>
+            <div class="publication-card">
+                <h3>Empowering Women in STEM: Bridging the Gap in South Asia and Nepal</h3>
+                <p>Published at: english.onlinekhabar.com</p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Section fade-in animation on scroll
+        const sections = document.querySelectorAll('.section');
+        const options = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, options);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
